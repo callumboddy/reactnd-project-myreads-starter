@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from 'prop-types'
 import BooksShelf from "./BookShelf";
+import { Link } from 'react-router-dom'
 
 class BooksList extends Component {
 
@@ -20,11 +21,9 @@ class BooksList extends Component {
           <BooksShelf heading="Want to Read" books={wishlist} onDidUpdateBookShelf={this.props.onDidUpdateBookShelf}/>
           <BooksShelf heading="Read" books={read} onDidUpdateBookShelf={this.props.onDidUpdateBookShelf}/>
         </div>
-        <div className="open-search">
-          <button onClick={() => this.setState({ showSearchPage: true })}>
-            Add a book
-          </button>
-        </div>
+        {/* <div className="open-search"> */}
+          <Link className="open-search" to='/search'>Add a book</Link>
+        {/* </div> */}
       </div>
     );
   }

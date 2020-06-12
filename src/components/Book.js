@@ -11,8 +11,9 @@ class Book extends Component {
   } 
 
   render() {
-    const { title, authors, imageLinks } = this.props.book
-    const { thumbnail } = imageLinks
+    const { title, authors, imageLinks={} } = this.props.book
+    const { thumbnail="" } = imageLinks
+    const shelf = this.props.shelf || this.props.book.shelf || 'none'
     return (
       <li>
         <div className="book">
@@ -26,7 +27,7 @@ class Book extends Component {
               }}
             />
             <div className="book-shelf-changer">
-              <select defaultValue={this.props.book.shelf} onChange={(event) => this.didUpdateBook(event)}>
+              <select defaultValue={shelf}  onChange={(event) => this.didUpdateBook(event)}>
                 <option value="move" disabled>Move to...</option>
                 <option value="currentlyReading" >Currently Reading</option>
                 <option value="wantToRead">Want to Read</option>
@@ -36,7 +37,9 @@ class Book extends Component {
             </div>
           </div>
           <div className="book-title">{title}</div>
-          <div className="book-authors">{authors.join(", ")}</div>
+          {authors &&
+            <div className="book-authors">{authors.join(", ")}</div>
+          }
         </div>
       </li>
     );
