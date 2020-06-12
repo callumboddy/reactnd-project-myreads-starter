@@ -21,16 +21,14 @@ class BooksList extends Component {
           <BooksShelf heading="Want to Read" books={wishlist} onDidUpdateBookShelf={this.props.onDidUpdateBookShelf}/>
           <BooksShelf heading="Read" books={read} onDidUpdateBookShelf={this.props.onDidUpdateBookShelf}/>
         </div>
-        {/* <div className="open-search"> */}
           <Link className="open-search" to='/search'>Add a book</Link>
-        {/* </div> */}
       </div>
     );
   }
 }
 
 BooksList.propTypes = {
-  books: PropTypes.array.isrequired
+  books: PropTypes.array.isRequired
 }
 
 export default BooksList;
