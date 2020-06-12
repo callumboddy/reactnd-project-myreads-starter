@@ -1,5 +1,5 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
 import SearchBooks from './components/SearchBooks'
 import BooksList from './components/BooksList'
@@ -12,7 +12,19 @@ class BooksApp extends React.Component {
      * users can use the browser's back and forward buttons to navigate between
      * pages, as well as provide a good URL they can bookmark and share.
      */
+    books: [],
     showSearchPage: false
+  }
+
+  componentDidMount() {
+    BooksAPI.getAll()
+    .then((books) => this.setState({books}))
+  }
+
+  didUpdateBook({ book, shelf }) {
+    BooksAPI.update(book, shelf)
+    .then(() => BooksAPI.getAll()
+    .then((books) => this.setState({books})))
   }
 
   didSelectBackButton = () => {
@@ -24,7 +36,7 @@ class BooksApp extends React.Component {
       <div className="app">
         {this.state.showSearchPage
         ? (<SearchBooks onDidSelectBackButton={this.didSelectBackButton}/>)
-        : (<BooksList />)
+        : (<BooksList books={this.state.books} onDidUpdateBookShelf={this.didUpdateBook.bind(this)} />)
         }
       </div>
     )

@@ -9,7 +9,7 @@ class BookShelf extends Component {
         <h2 className="bookshelf-title">{this.props.heading}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
-              <Book />
+          {this.props.books.map(book => <Book key={book.title} book={book} onDidUpdateBookShelf={this.props.onDidUpdateBookShelf}/>)}
           </ol>
         </div>
       </div>
@@ -18,7 +18,8 @@ class BookShelf extends Component {
 }
 
 BookShelf.propTypes = {
-  heading: PropTypes.string.isRequired
+  heading: PropTypes.string.isRequired,
+  books: PropTypes.array.isRequired
 }
 
 export default BookShelf;
